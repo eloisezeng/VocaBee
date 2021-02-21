@@ -68,7 +68,7 @@ io.on("connect", (socket) => {
 
     //End ro when all players responded or [time is up](not implemented yet)
     if (playerResponses.length == players.length){
-      socket.emit("roundEnd", {playerResponses: playerResponses});
+      io.emit("roundEnd", {playerResponses: playerResponses});
       console.log("this round is ending!");
     }
   });
