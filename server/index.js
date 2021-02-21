@@ -32,12 +32,13 @@ io.on("connect", (socket) => {
 
     console.log("=======USER JOINED========");
     callback();
-    socket.emit('getPlayers', players)
     console.log(players)
+    socket.emit('getPlayers', players)
   });
 
   //Start the round
   socket.on("roundStart", () => {
+    socket.emit('getPlayers', players)
     gameInSession = true;
 
     let dictionary = {
@@ -49,11 +50,12 @@ io.on("connect", (socket) => {
     }
     const words = Object.keys(dictionary);
     const word = words[ words.length * Math.random() << 0]
-    socket.emit("gameWord", {word: word, definition: words[word]}); 
+    io.emit("gameWord", {word: word, definition: words[word]}); 
   });
 
   //When a player guesses an answer
   socket.on("guess", (guess) => {
+    console.log("when a user guesses...")
     const user = getUser(socket.id);
 
     if (user){
@@ -76,7 +78,7 @@ io.on("connect", (socket) => {
     console.log("Picked answer: " + pickUserID);
     const real_def_id = players.find((player) => player.name === "real_def").id
     if (pickUserID === real_def_id) { // if the player guesses the correct definition
-      players.find((player) => player.id === socket.id).points += 3 
+      players.find((player) => player.id === socket.id).points += 3
     }
     else {
       const player = players.find((player) => player.id === pickUserID)
@@ -87,6 +89,7 @@ io.on("connect", (socket) => {
 
 });
 
+const getUser = (id) => players.find((player) => player.id === id);
 
 const addUser = (id, name) => {
   const existingPlayer = players.find((player) => player.name === name);
@@ -107,7 +110,5 @@ const addUser = (id, name) => {
 
   return { user };
 }
-
-const getUser = (id) => players.find((player) => player.id === id);
 
 server.listen(process.env.PORT || 5000, () => console.log(`Server has started.`));
