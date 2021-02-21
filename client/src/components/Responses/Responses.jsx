@@ -14,14 +14,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default class Responses extends Component {
     state = {
-        guess: "",
+        guessUserID: "",
     }
-    onSubmit = (e) => {
-        // this.setState({ [e.target.name]: e.target.value})
-        // redirect
 
-        
-    }
 
     handleRadioChange = (e) => {
         this.setState({
@@ -34,16 +29,16 @@ export default class Responses extends Component {
         <div>
             <FormControl component="fieldset">
                 <FormLabel component="legend"><h1>Guess which one is the real definition!</h1></FormLabel>
-                <RadioGroup aria-label="guessQuiz" name="guessQuiz" value={this.state.guess} onChange={this.handleRadioChange}>
+                <RadioGroup aria-label="guessQuiz" name="guessQuiz" value={this.state.guessUserID} onChange={this.handleRadioChange}>
                     {
                         this.props.responses.map((response) => {
                             console.log(response.definition);
-                            return <FormControlLabel value={response.definition} control={<Radio />} label={response.definition} />
+                            return <FormControlLabel value={response.userID} control={<Radio />} label={response.definition} />
                         })
                     }
                 </RadioGroup>
 
-                <Button type="submit" variant="outlined" color="primary">Submit Guess</Button>
+                <Button onClick={() => this.props.onSubmit(this.state.guessUserID)} type="submit" variant="outlined" color="primary">Submit Picked Guess</Button>
             </FormControl>
         </div>
     )

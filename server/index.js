@@ -23,7 +23,6 @@ let playerResponses = [];
 let gameInSession = false;
 
 io.on("connect", (socket) => {
-
   socket.on("join", (name, callback) => {
     const { error, user } = addUser(socket.id, name);
 
@@ -51,9 +50,6 @@ io.on("connect", (socket) => {
     const words = Object.keys(dictionary);
     const word = words[ words.length * Math.random() << 0]
     socket.emit("gameWord", {word: word, definition: words[word]}); 
-    // i moved the random word selection feature up here 
-    // because it seems like players start rounds at different times
-    // so they each were getting different words
   });
 
   //When a player guesses an answer
@@ -78,6 +74,14 @@ io.on("connect", (socket) => {
   //When a player picks the true definition of the word
   socket.on("pick", (pickUserID) => {
     console.log("Picked answer: " + pickUserID);
+    const real_def_id = players.find((player) => player.name === "real_def").id
+    if (pickUserID === real_def_id) { // if the player guesses the correct definition
+      players.find((player) => player.id === socket.id).points += 3 
+    }
+    else {
+      const player = players.find((player) => player.id === pickUserID)
+      player.points += 1
+    }
   });
   
 
