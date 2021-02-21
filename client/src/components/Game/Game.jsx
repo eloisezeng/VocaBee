@@ -16,7 +16,7 @@ export default class Game extends Component {
     socket = io("http://localhost:5000");
     console.log("mounted!");
 
-    socket.emit("join", "testPlayer");
+    // socket.emit("join", "testPlayer");
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value})
