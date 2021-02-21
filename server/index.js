@@ -50,7 +50,7 @@ io.on("connect", (socket) => {
     }
     const words = Object.keys(dictionary);
     const word = words[ words.length * Math.random() << 0]
-    socket.emit("gameWord", {word: word, definition: words[word]}); 
+    io.emit("gameWord", {word: word, definition: words[word]}); 
     // i moved the random word selection feature up here 
     // because it seems like players start rounds at different times
     // so they each were getting different words

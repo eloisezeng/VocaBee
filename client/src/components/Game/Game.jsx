@@ -26,10 +26,10 @@ export default class Game extends Component {
     const { name } = queryString.parse(window.location.search);
 
     //Initializing Socket.io connection
-    socket = io("http://localhost:5000");
+    this.socket = io("http://localhost:5000");
 
     //Use the Socket.io connection to make a join request
-    socket.emit("join", name, (error) => {
+    this.socket.emit("join", name, (error) => {
       
       if (error) {
         console.log("Error! " + error);
@@ -41,7 +41,7 @@ export default class Game extends Component {
     });
     
     // Get the player names and points when the round starts
-    socket.on("getPlayers", (players) => {
+    this.socket.on("getPlayers", (players) => {
       this.setState({
         ...this.state,
         players: players
@@ -49,7 +49,8 @@ export default class Game extends Component {
     })
 
     //When socket emits gameWord (when the round starts)
-    socket.on("gameWord", (gameWord) => {
+    this.socket.on("gameWord", (gameWord) => {
+      console.log("Game Word: " + gameWord.word);
       this.setState({
         ...this.state,
         word: gameWord.word,
@@ -58,7 +59,7 @@ export default class Game extends Component {
     });
     
     //When the Socket.io tells the client that the round has ended
-    socket.on("roundEnd", ({ playerResponses }) => {
+    this.socket.on("roundEnd", ({ playerResponses }) => {
       // Client console.log is in the browser console
       this.setState({
         ...this.state,
@@ -88,12 +89,12 @@ export default class Game extends Component {
   }
   
   startGame = () => {
-    socket.emit("roundStart");
+    this.socket.emit("roundStart");
   }
 
   playerSelects = (guessUserID) => {
     console.log(guessUserID)
-    socket.emit("pick", guessUserID);
+    this.socket.emit("pick", guessUserID);
   }
 
   render() {
