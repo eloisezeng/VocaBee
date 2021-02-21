@@ -9,14 +9,19 @@ let socket;
 export default class Game extends Component {
 
   state = {
-    def: "" // user's definition of the word
+    def: "", // user's definition of the word
+    playerResponses: []
   }
 
   componentDidMount() {
     socket = io("http://localhost:5000");
-    console.log("mounted!");
-
-    // socket.emit("join", "testPlayer");
+    socket.emit("join", "testPlayer");
+    socket.on("end", ({ playerResponses }) => {
+        this.setState({
+          ...this.state,
+          playerResponses: playerResponses
+        });
+    });
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value})
@@ -32,6 +37,13 @@ export default class Game extends Component {
       //Reset
       this.setState({ def: ""})   
       }
+
+  renderResponses = () => {
+    this.state.playerResponses.map((playerResponse) => {
+      console.log(playerResponse.response);
+      return <li key={playerResponse.userID}>{playerResponse.response}</li>
+    });
+  }
 
   render() {
     
@@ -50,10 +62,19 @@ export default class Game extends Component {
                 onChange={this.onChange} //  this.onChange is the name of the method/function in the class
                 style={inputStyle}
                 />
-             <Link onClick={e => (!this.state.def) ? e.preventDefault() : null} to={`/responses?def=${this.state.def}`}> 
-              <Button color="primary">Submit</Button>
-            </Link>
+             {/* <Link onClick={e => (!this.state.def) ? e.preventDefault() : null} to={`/responses?def=${this.state.def}`}>  */}
+              <Button color="primary" type="submit">Submit</Button>
+            {/* </Link> */}
           </form>
+
+          <ul>
+            {     
+              this.state.playerResponses.map((playerResponse) => {
+                return <li key={playerResponse.userID}>{playerResponse.response}</li>
+            }) 
+            }
+          </ul>
+
       </div>
     );
   }
