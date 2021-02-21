@@ -13,21 +13,18 @@ export default class Join extends Component {
   render() {
     return (
       <div style={joinPageStyle}>
-        {/* Rectangle 4 on figma */}
-        <div style={rectangle2}> </div>
-        <div style={rectangle1}> </div>
-        <div style={rectangle2}> </div>
+        <div style={welcomeStyle}>Log In To Play</div>
       <div>
         <div>
           <Box flexDirection="col">
-            <TextField name="name" placeholder="Username: " value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
+            <TextField style={boxStyle} name="name" placeholder="Username: " value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
           </Box>
         </div>
 
         <div>
           <Box flexDirection="col">
             <Link onClick={e => (!this.state.name) ? e.preventDefault() : null} to={`/game?name=${this.state.name}`}> 
-              <Button color="primary">Join</Button>
+              <Button variant="contained" style={darkBox} color="primary">Login</Button>
             </Link>
           </Box>
         </div>
@@ -39,16 +36,38 @@ export default class Join extends Component {
 
 const joinPageStyle = {
   textAlign: "center",
+  background: "#FEF9E7",
+  marginTop: "100px",
+  marginRight: "300px",
+  marginLeft: "300px",
+  paddingBottom: "50px",
+  paddingTop: "50px",
+  borderRadius: "30px"
 }
 
-const rectangle1 = {
-  width: 207,
-  height: 42,
-  background: '#FEF9E7',
+const welcomeStyle = {
+  textAlign: "center",
+  fontFamily: "Georgia",
+  fontSize: "30px"
 }
 
-const rectangle2 = {
-  width: 117,
-  height: 26,
-  background: '#FFDD53',
+const boxStyle = {
+  textAlign: "center",
+  fontFamily: "Georgia",
+  background: "#FEF9E7",
+  borderRadius: "20px",
+  width: "200px",
+  paddingBottom: "5px",
+  paddingTop: "5px",
+  paddingRight: "7px",
+  paddingLeft: "7px",
+  marginBottom: "5px"
+}
+
+const darkBox = {
+  textAlign: "center",
+  fontFamily: "Georgia",
+  background: "#FFDD53",
+  borderRadius: "20px",
+  width: "200px"
 }

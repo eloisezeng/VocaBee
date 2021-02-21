@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-// import { TextField } from '@material-ui/core';
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-export default class Game extends Component {
-  state = {
-      next: false, // if true, give another question
-      end: false // if true, end the game
-      }
-
-  onChange = (e) => this.setState({ [e.target.name]: e.target.value})
-  onSubmit = (e) => {
+export default class Leaderboard extends Component {
+  onClick = (e) => {
       e.preventDefault() // prevent form from submitting to actual file
       console.log("Go to next round")
       }
 
   render() {
     return (
-      <div>
+      <div style={containerStyle}>
         <h1>Leaderboard</h1>
-        <button>Next</button>
-        <button>End Game</button>
+            {
+              this.props.players.map((player, index) => {
+                  return <p>{index + 1}. {player.name}: {player.points}</p>
+              })
+            }
+            <Link onClick={e => null} to={`/game`}> 
+              <Button color="primary">Next</Button>
+            </Link>
+            <Link onClick={e => null} to={`/`}> 
+              <Button color="primary">End Game</Button>
+            </Link>
       </div>
     );
   }
+}
+
+const containerStyle = {
+  textAlign: "center"
 }
