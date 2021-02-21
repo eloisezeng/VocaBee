@@ -2,10 +2,10 @@
 For the Blueprint Hackathon
 
 # Team Members
-Daniel Gao
-Grace Pizzini
-Hao Teng
-Eloise Zeng
+- Daniel Gao
+- Grace Pizzini
+- Hao Teng
+- Eloise Zeng
 
 Sources:
 https://material-ui.com/
