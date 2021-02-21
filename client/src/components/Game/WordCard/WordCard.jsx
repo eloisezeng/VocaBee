@@ -8,11 +8,16 @@ export default class WordCard extends Component {
         <div style={cardStyle}>
             {this.props.word}
         </div>
+
     )
   }
 }
 
 const cardStyle = {
-  backgroundColor: "gold",
-  margin: "50px"
+  textAlign: "center",
+  background: '#F6D458',
+  padding: "20px", 
+  margin: "20px",
+  fontSize: "100px",
+  borderRadius: "10px"
 }

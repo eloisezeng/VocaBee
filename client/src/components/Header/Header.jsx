@@ -6,15 +6,12 @@ import React from 'react'
 export default function Header() {
     return (
         <header style={headerstyle}>
-           <img src="/src/assets/image0.jpg" position="absolute" />
+           <img src="/images/vocabee.jpg" style={{height: "100px"}}/>
         </header>
     )
 }
 
 const headerstyle = {
     // background: 'rgb(30, 200, 101)',
-    color: 'black', // color of text
     textAlign: 'center',
-    padding: '10px',
-    marginBottom: '20px',
 }

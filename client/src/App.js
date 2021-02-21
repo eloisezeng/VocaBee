@@ -48,6 +48,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+        <div className="container">
          <React.Fragment>
               <Header/>
           </React.Fragment>
@@ -72,6 +73,7 @@ class App extends Component {
             />
           </React.Fragment>
         )} />
+        </div>
       </Router>
       
 

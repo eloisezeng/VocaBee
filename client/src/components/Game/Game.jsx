@@ -30,23 +30,22 @@ export default class Game extends Component {
       socket.emit("guess", this.state.def); //Sending the backend the player's response
 
       //Reset
-      this.setState({ def: ""})
+      this.setState({ def: ""})   
       }
 
   render() {
     
     return (
       <div>
-          <h3>VocaBee</h3>
-          <h3>Enter the Definition of the Word</h3>
+          <h1 style={{textAlign: "center"}}>Enter the Definition of the Word: </h1>
           
-          <WordCard word={"Test"} />
+          <WordCard word={"Test"} /> {/* must get word from backend*/}
           
           <form onSubmit={this.onSubmit} style={{display: 'flex'}}>
             <TextField
                 type='text'
                 name='def' 
-                placeholder='Enter the Definition of the Word: '
+                placeholder='Type here: '
                 value={this.state.def} // value of text in input is the state's definition
                 onChange={this.onChange} //  this.onChange is the name of the method/function in the class
                 style={inputStyle}

@@ -12,16 +12,15 @@ export default class Join extends Component {
 
   render() {
     return (
+      <div style={joinPageStyle}>
+        {/* Rectangle 4 on figma */}
+        <div style={rectangle2}> </div>
+        <div style={rectangle1}> </div>
+        <div style={rectangle2}> </div>
       <div>
-        <img src="/client/src/assets/image0.jpg" position="absolute" />
-        <div style = {rectangle1} />
-        <div style = {rectangleCode}> Enter Game Code </div>
-
-      <div>
-        <h3>Join Page</h3>
-      <div>
+        <div>
           <Box flexDirection="col">
-            <TextField name="name" placeholder="name" value={this.state.name} onChange={(e) => this.setState({name: e.target.value})} />
+            <TextField name="name" placeholder="Username: " value={this.state.name} onChange={(e) => this.setState({name: e.target.value})}/>
           </Box>
         </div>
 
@@ -38,37 +37,18 @@ export default class Join extends Component {
   }
 }
 
-const rectangle1 = {
-  position: 'absolute',
-  width: 249, 
-  height: 39, 
-  left: 452, 
-  top: 467, 
-  background: '#FEF9E7',
-}
-const rectangleCode = {
-  position: 'absolute',
-  width: 249, 
-  height: 39, 
-  left: 452, 
-  top: 467, 
-  background: '#FEF9E7',
-  fontFamily: "Roboto",
-  fontStyle: "Regular",
-  fontSize: "18px",
-  lineHeight: "21px",
-  lineHeight: "100%",
-  Align: "Center",
-  verticalAlign: "Center",
-  color: ""
-  
+const joinPageStyle = {
+  textAlign: "center",
 }
 
-const rectangleName = {
-  position: 'absolute',
+const rectangle1 = {
   width: 207,
   height: 42,
-  left: 473,
-  top: 411,
-  background: 'FFC500'
+  background: '#FEF9E7',
+}
+
+const rectangle2 = {
+  width: 117,
+  height: 26,
+  background: '#FFDD53',
 }
